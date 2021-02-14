@@ -1,12 +1,14 @@
 <template>
 	<div class="signin-container">
 		<h1>Sign In</h1>
-		<b-form>
+		<b-form @submit.prevent="submit">
+			{{ form }}
 			<b-form-group>
 				<b-form-input
 					type="email"
 					placeholder="Enter email"
 					required
+					v-model="form.email"
 				></b-form-input>
 			</b-form-group>
 			<b-form-group>
@@ -14,6 +16,7 @@
 					type="password"
 					placeholder="Enter password"
 					required
+					v-model="form.password"
 				></b-form-input>
 			</b-form-group>
 			<b-button type="submit" variant="primary">Submit</b-button>
@@ -22,10 +25,37 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
 	name: 'signin',
 	components: {
 		//
+	},
+
+	data () {
+		return {
+			form: {
+				email: '',
+				password: '',
+			}
+		}
+	},
+
+	methods: {
+		...mapActions({
+			login: 'auth/login'
+		}),
+
+		submit () {
+			this.login(this.form).then(() => {
+				this.$router.replace({
+					name: 'home'
+				})
+			}).catch(() => {
+				console.log('fail');
+			})
+		}
 	}
 }
 </script>

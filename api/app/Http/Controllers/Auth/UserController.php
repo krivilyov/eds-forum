@@ -10,7 +10,12 @@ class UserController extends Controller
 {
     public function userData(Request $request)
     {
-        return $request->user();
+        $user = $request->user();
+
+        return response()->json([
+            'email' => $user->email,
+            'name'  => $user->name,
+        ]);
     }
 
     public function logout()
