@@ -50,12 +50,13 @@ export default {
 
 	methods: {
 		...mapActions({
-			login: 'auth/login'
+			login: 'auth/login',
+			removeErrorsAction: 'auth/removeErrors'
 		}),
 
 		submit () {
 			this.login(this.form).then(() => {
-				this.errors = null;
+				this.removeErrorsAction();
 				this.$router.replace({
 					name: 'home'
 				})

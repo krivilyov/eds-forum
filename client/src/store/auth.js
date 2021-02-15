@@ -67,6 +67,10 @@ export default {
 			}
 		},
 
+		removeErrors ({ commit }) {
+			commit('SET_ERRORS', null)
+		},
+
 		signOut ({ commit }) {
 			return axios.post('auth/logout').then(() => {
 				commit('SET_TOKEN', null)

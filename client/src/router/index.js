@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import SignIn from '../views/SignIn'
+import SignUp from '../views/SignUp'
 import CreateArticle from '../views/CreateArticle'
 import store from '@/store'
 
@@ -37,6 +38,20 @@ const routes = [
     path: '/signin',
     name: 'signin',
     component: SignIn,
+    beforeEnter: (to, from, next) => {
+      if(store.getters['auth/user']) {
+        return next({
+          name: 'home'
+        })
+      }
+
+      next()
+    }
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: SignUp,
     beforeEnter: (to, from, next) => {
       if(store.getters['auth/user']) {
         return next({
