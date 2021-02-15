@@ -6,6 +6,7 @@ export default {
 	state: {
 		token: null,
 		user: null,
+		errors: null,
 	},
 
 	getters: {
@@ -15,6 +16,10 @@ export default {
 
 		user (state) {
 			return state.user
+		},
+
+		errors (state) {
+			return state.errors
 		}
 	},
 
@@ -25,18 +30,32 @@ export default {
 
 		SET_USER (state, data) {
 			state.user = data
+		},
+
+		SET_ERRORS (state, errors) {
+			state.errors = errors
 		}
 	},
 
 	actions: {
-		async login ({ dispatch }, credentials) {
-			let response = await axios.post('auth/login', credentials);
-			
+		async login ({ dispatch, commit }, credentials) {
+
+			let response = await axios.post('auth/login', credentials).then().catch((error) => {
+				commit('SET_ERRORS', error.response.data.errors)
+			})
+
 			return dispatch('attempt', response.data.token);
 		},
 
-		async attempt ({ commit }, token) {
-			commit('SET_TOKEN', token)
+		async attempt ({ commit, state }, token) {
+
+			if(token) {
+				commit('SET_TOKEN', token)
+			}
+
+			if(!state.token) {
+				return
+			}
 
 			try {
 				let response = await axios.get('auth/user')
@@ -46,6 +65,13 @@ export default {
 				commit('SET_TOKEN', null)
 				commit('SET_USER', null)
 			}
+		},
+
+		signOut ({ commit }) {
+			return axios.post('auth/logout').then(() => {
+				commit('SET_TOKEN', null)
+				commit('SET_USER', null)
+			})
 		}
 	},
 }

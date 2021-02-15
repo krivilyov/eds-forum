@@ -12,7 +12,7 @@
 		<b-nav>
 			<b-nav-item to="/">Home</b-nav-item>
 			<b-nav-item to="/about">About</b-nav-item>
-			<b-nav-item to="/create">Create article</b-nav-item>
+			<b-nav-item to="/create-article">Create article</b-nav-item>
 		</b-nav>
 		<Authorization />
 	</div>

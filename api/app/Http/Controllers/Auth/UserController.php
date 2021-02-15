@@ -18,8 +18,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::user()->token()->delete();
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'status_code' => 200,
+            'message'     => 'Unauthorized',
+        ]);
     }
 }

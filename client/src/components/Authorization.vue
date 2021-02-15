@@ -3,7 +3,7 @@
 		<b-nav>
 			<template v-if="authenticated">
 				<b-nav-item disabled>{{ user.name }}</b-nav-item>
-				<b-nav-item to="/logout">Logout</b-nav-item>
+				<b-nav-item to="/logout" @click.prevent="signOut">Logout</b-nav-item>
 			</template>
 
 			<template v-else>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
 	computed: {
@@ -24,6 +24,19 @@ export default {
 			authenticated: 'auth/authenticated',
 			user: 'auth/user',
 		})
+	},
+	methods: {
+		...mapActions({
+			signOutAction: 'auth/signOut'
+		}),
+
+		signOut () {
+			this.signOutAction().then(() => {
+				this.$router.replace({
+					name: 'home'
+				})
+			})
+		}
 	}
 }
 </script>
