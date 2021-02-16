@@ -26,7 +26,7 @@ class RegistrationController extends Controller
             if($validation->fails())
             {
                 return response([
-                    'error' => $validation->errors()->all()
+                    'errors' => $validation->errors()
                 ], 422);
             }
 
@@ -37,9 +37,18 @@ class RegistrationController extends Controller
             //create user
             $user = User::create($request->toArray());
 
+            $token = $user->createToken('authToken')->plainTextToken;
+
+            return response()->json([
+                'status_code' => 200,
+                'message'     => 'Authorisation successfully',
+                'token'       => $token
+            ]);
+
             return response()->json([
                 'status_code' => 200,
                 'message'     => 'Registration successfully',
+                'token'       => $token
             ]);
 
         }catch (\Exception $error){

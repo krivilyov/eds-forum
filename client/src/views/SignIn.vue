@@ -18,14 +18,13 @@
 				></b-form-input>
 				<span class="text-error" v-if="errors && errors.password">{{ errors.password[0] }}</span>
 			</b-form-group>
-			<b-button type="submit" variant="primary">Submit</b-button>
+			<b-button type="submit" variant="primary">Sign in</b-button>
 		</b-form>
 	</div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-// import store from '@/store'
 
 export default {
 	name: 'signin',
