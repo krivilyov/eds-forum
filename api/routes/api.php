@@ -9,3 +9,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'App\Http\Controllers\Auth'], f
     Route::post('/registration', 'RegistrationController@registration')->name('registration.api');
     Route::post('/login', 'LoginController@login')->name('login.api');
 });
+
+Route::group(['namespace' => 'App\Http\Controllers\Articles'], function() {
+    Route::post('/categories', 'CategoriesController');
+});

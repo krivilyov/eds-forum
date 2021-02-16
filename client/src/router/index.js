@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import SignIn from '../views/SignIn'
 import SignUp from '../views/SignUp'
+import Category from '../views/Category'
 import CreateArticle from '../views/CreateArticle'
 import store from '@/store'
 
@@ -61,6 +62,11 @@ const routes = [
 
       next()
     }
+  },
+  {
+    path: '/category/:categoryAlias',
+    name: 'category',
+    component: Category,
   }
 ]
 
