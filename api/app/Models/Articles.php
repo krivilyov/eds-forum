@@ -9,6 +9,14 @@ class Articles extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'alias',
+        'title',
+        'content',
+        'category_id',
+        'user_id',
+    ];
+
     //relations
     public function category()
     {

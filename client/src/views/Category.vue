@@ -13,7 +13,6 @@
 							<b-badge class="like-quantity" variant="primary" pill>3</b-badge>
 							<b-icon-hand-thumbs-up class="like-icon"></b-icon-hand-thumbs-up>
 						</div>
-						
 					</div>
 				</b-list-group-item>
 			</b-list-group>
@@ -24,8 +23,6 @@
 				В данной категории нет статей
 			</div>
 		</template>
-
-		
 	</div>
 </template>
 

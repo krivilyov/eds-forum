@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Articles;
 use App\Models\Categories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Helpers\Useful;
 
 class ArticlesController extends Controller
 {
@@ -35,5 +37,42 @@ class ArticlesController extends Controller
         }
 
         return response()->json($article);
+    }
+
+    public function createArticle(Request $request)
+    {
+        $user = $request->user();
+
+        $validation = Validator::make($request->all(), [
+            'title'       => 'required|string|max:90',
+            'content'     => 'required|string',
+            'category_id' => 'required|int',
+        ]);
+
+        if($validation->fails())
+        {
+            return response([
+                'errors' => $validation->errors()
+            ], 422);
+        }
+        
+        $article = new Articles();
+        $article->alias = '';
+        $article->title = Useful::parseCleanValue($request['title']);
+        $article->content = Useful::parseCleanValue($request['content']);
+        $article->category_id = $request['category_id'];
+        $article->user_id = $user->id;
+
+        if($article->save())
+        {
+            //create alias
+            $article->alias = Useful::create_alias($article->id, Useful::translit($article->title, 'art'));
+            $article->save();
+        }
+
+        return response()->json([
+            'status_code' => 200,
+            'message'     => 'Create article successfully',
+        ]);
     }
 }
