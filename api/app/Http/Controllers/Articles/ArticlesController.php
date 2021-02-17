@@ -24,4 +24,16 @@ class ArticlesController extends Controller
 
         return response()->json($articles);
     }
+
+    public function getArticle(Request $request)
+    {
+        $article = null;
+
+        if($request->input('article_alias'))
+        {
+            $article = Articles::with(['category', 'user'])->where('alias', $request->input('article_alias'))->get()->first();
+        }
+
+        return response()->json($article);
+    }
 }

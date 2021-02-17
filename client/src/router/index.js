@@ -5,7 +5,7 @@ import About from '../views/About.vue'
 import SignIn from '../views/SignIn'
 import SignUp from '../views/SignUp'
 import Category from '../views/Category'
-import Article from '../views/Article'
+import ArticleInfo from '../views/ArticleInfo'
 import CreateArticle from '../views/CreateArticle'
 import PageNotFound from '../views/PageNotFound'
 import store from '@/store'
@@ -71,9 +71,9 @@ const routes = [
     component: Category,
   },
   {
-    path: '/article/:articleAlias',
-    name: 'article',
-    component: Article,
+    path: '/article-info/:articleAlias',
+    name: 'article-info',
+    component: ArticleInfo,
   },
   { 
     path: "*",

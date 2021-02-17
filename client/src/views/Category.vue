@@ -4,7 +4,7 @@
 			<b-list-group>
 				<b-list-group-item class="d-flex justify-content-between align-items-center" v-for="article in articles" :key="article.id">
 					<div class="article-info">
-						<router-link class="article-link" :to="{ name: 'article', params: { articleAlias: article.alias}}">{{ article.title }}</router-link>
+						<router-link class="article-link" :to="{ name: 'article-info', params: { articleAlias: article.alias}}">{{ article.title }}</router-link>
 						<div class="article-shift-content">{{ article.content.substring(0, 300) }}</div>
 					</div>
 					<div class="achievement">

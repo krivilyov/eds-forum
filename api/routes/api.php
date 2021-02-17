@@ -13,4 +13,5 @@ Route::group(['prefix' => 'auth', 'namespace' => 'App\Http\Controllers\Auth'], f
 Route::group(['namespace' => 'App\Http\Controllers\Articles'], function() {
     Route::post('/categories', 'CategoriesController');
     Route::post('/articles', 'ArticlesController@getArticles');
+    Route::post('/article', 'ArticlesController@getArticle');
 });
