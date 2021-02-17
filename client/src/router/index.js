@@ -5,7 +5,9 @@ import About from '../views/About.vue'
 import SignIn from '../views/SignIn'
 import SignUp from '../views/SignUp'
 import Category from '../views/Category'
+import Article from '../views/Article'
 import CreateArticle from '../views/CreateArticle'
+import PageNotFound from '../views/PageNotFound'
 import store from '@/store'
 
 Vue.use(VueRouter)
@@ -67,6 +69,16 @@ const routes = [
     path: '/category/:categoryAlias',
     name: 'category',
     component: Category,
+  },
+  {
+    path: '/article/:articleAlias',
+    name: 'article',
+    component: Article,
+  },
+  { 
+    path: "*",
+    name: 'page-not-found',
+    component: PageNotFound
   }
 ]
 

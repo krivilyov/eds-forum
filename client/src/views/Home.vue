@@ -3,7 +3,7 @@
     <b-list-group>
       <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="category in categories" :key="category.id">
          <router-link class="category-link" :to="{ name: 'category', params: { categoryAlias: category.alias}}">{{ category.title }}</router-link>
-        <b-badge variant="primary" pill>0</b-badge>
+        <b-badge variant="primary" pill>{{ category.articles_quantity }}</b-badge>
       </b-list-group-item>
     </b-list-group>
   </div>
