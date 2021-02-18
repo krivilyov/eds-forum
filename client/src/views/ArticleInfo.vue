@@ -5,7 +5,7 @@
 				<b-list-group-item>
 					<div class="article-info">
 						<div class="article-info__achievement">
-							<b-badge class="author" variant="light" pill>Автор: {{ articleInfo.user.name }}</b-badge>
+							<b-badge class="author" variant="light" pill v-if="articleInfo.user.name">Автор: {{ articleInfo.user.name }}</b-badge>
 							<div class="likes">
 								<b-badge class="like-quantity" variant="primary" pill>3</b-badge>
 								<b-icon-hand-thumbs-up class="like-icon"></b-icon-hand-thumbs-up>

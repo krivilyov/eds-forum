@@ -55,7 +55,7 @@ class ArticlesController extends Controller
                 'errors' => $validation->errors()
             ], 422);
         }
-        
+
         $article = new Articles();
         $article->alias = '';
         $article->title = Useful::parseCleanValue($request['title']);
@@ -70,9 +70,6 @@ class ArticlesController extends Controller
             $article->save();
         }
 
-        return response()->json([
-            'status_code' => 200,
-            'message'     => 'Create article successfully',
-        ]);
+        return response()->json($article);
     }
 }

@@ -1,5 +1,5 @@
 <template>
-	<div class="signin-container">
+	<div class="signup-container">
 		<h1>Registration</h1>
 		
 		<b-form @submit.prevent="submit" novalidate>
@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style scoped>
-	.signin-container {
+	.signup-container {
 		max-width: 400px;
 		margin: auto;
 	}
