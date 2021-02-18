@@ -1,5 +1,13 @@
 # eds-forum
-
+Тестовое задание “Eclipse Digital Studio”<br>
+Цель задания: реализовать небольшой форум, на котором можно просматривать, оценивать и писать статьи в различных категориях. Выбор тематика остается на усмотрение тестируемого.
+***
+![](https://i.postimg.cc/xT8ykkkQ/eds-forum-1.jpg)
+***
+![](https://i.postimg.cc/ZKQP6T3d/eds-forum-2.jpg)
+***
+![](https://i.postimg.cc/SQDfNLxV/eds-forum-3.jpg)
+***
 * клонируем проект
 ##API
 * в терминале открываем директорию api
