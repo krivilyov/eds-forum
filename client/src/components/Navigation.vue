@@ -72,4 +72,8 @@ components: {
 		font-size: 18px;
 		line-height: 24px;
 	}
+
+	.router-link-exact-active {
+		text-decoration: underline;
+	}
 </style>

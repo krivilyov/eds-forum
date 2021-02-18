@@ -6,9 +6,11 @@ export default {
 	state: {
 		categories: [],
 		articles: [],
+		category: null,
 		articleInfo: null,
 		errors: null,
 	},
+
 	getters: {
 		categories (state) {
 			return state.categories
@@ -16,6 +18,10 @@ export default {
 
 		articles (state) {
 			return state.articles
+		},
+
+		category (state) {
+			return state.category
 		},
 
 		articleInfo (state) {
@@ -26,6 +32,7 @@ export default {
 			return state.errors
 		}
 	},
+
 	mutations: {
 		SET_CATEGORIES (state, categories) {
 			state.categories = categories
@@ -33,6 +40,10 @@ export default {
 
 		SET_ARTICLES (state, articles) {
 			state.articles = articles
+		},
+
+		SET_CATEGORY (state, category) {
+			state.category = category
 		},
 
 		SET_ARTICLE (state, articleInfo) {
@@ -43,6 +54,7 @@ export default {
 			state.errors = errors
 		}
 	},
+
 	actions: {
 		async getCategories ({ commit }) {
 			let response = await axios.post('categories')
@@ -50,8 +62,11 @@ export default {
 		},
 
 		async getArticles ({ commit }, category_alias) {
-			let response = await axios.post('articles', category_alias)
-			commit('SET_ARTICLES', response.data)
+			let responseCategory = await axios.post('category', category_alias)
+			commit('SET_CATEGORY', responseCategory.data)
+
+			let responseArticles = await axios.post('articles', category_alias)
+			commit('SET_ARTICLES', responseArticles.data)
 		},
 
 		async getArticleInfo ({ commit }, article_alias) {

@@ -27,4 +27,16 @@ class CategoriesController extends Controller
 
         return response()->json($formattedCategories);
     }
+
+    public function getCategory(Request $request)
+    {
+        $category = null;
+
+        if($request->input('category_alias'))
+        {
+            $category = Categories::where('alias', $request['category_alias'])->get()->first();
+        }
+
+        return response()->json($category);
+    }
 }

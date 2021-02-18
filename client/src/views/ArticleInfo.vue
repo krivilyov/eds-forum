@@ -4,6 +4,7 @@
 		<Loader v-if="loading"/>
 
 		<template v-else-if="articleInfo">
+			<Breadcrumbs v-bind:breadcrumbItems = "breadcrumbItems" />
 			<b-list-group>
 				<b-list-group-item>
 					<div class="article-info">
@@ -35,18 +36,27 @@
 import { mapActions, mapGetters } from 'vuex'
 import PageNotFound from './PageNotFound'
 import Loader from '@/components/Loader'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export default {
 	name: 'article-info',
 	
 	components: {
 		PageNotFound,
-		Loader
+		Loader,
+		Breadcrumbs
 	},
 	
 	data () {
 		return {
-			loading: false
+			loading: false,
+			breadcrumbItems: [
+				{
+					id: 0,
+					text: 'Home',
+					href: '/'	
+				},
+			]
 		}
 	},
 
@@ -71,6 +81,19 @@ export default {
 		this.loading = true;
 
 		this.getArticleInfoAction(alias).then(() => {
+
+			//update breadcrumbs
+			this.breadcrumbItems.push(
+				{
+					text:  this.articleInfo.category.title,
+					href: '/category/' +  this.articleInfo.category.alias
+				},
+				{
+					text:  this.articleInfo.title,
+					href: '/article-info/' +  this.articleInfo.alias
+				},
+			);
+
 			//turn off loader
 			this.loading = false;
 		})

@@ -3,24 +3,30 @@
 
     <Loader v-if="loading"/>
 
-    <b-list-group v-else>
-      <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="category in categories" :key="category.id">
-         <router-link class="category-link" :to="{ name: 'category', params: { categoryAlias: category.alias}}">{{ category.title }}</router-link>
-        <b-badge variant="primary" pill>{{ category.articles_quantity }}</b-badge>
-      </b-list-group-item>
-    </b-list-group>
+    <template v-else>
+      <Breadcrumbs />
+
+      <b-list-group>
+        <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="category in categories" :key="category.id">
+          <router-link class="category-link" :to="{ name: 'category', params: { categoryAlias: category.alias}}">{{ category.title }}</router-link>
+          <b-badge variant="primary" pill>{{ category.articles_quantity }}</b-badge>
+        </b-list-group-item>
+      </b-list-group>
+    </template>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Loader from '@/components/Loader'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export default {
   name: 'home',
 
   components: {
-		Loader
+		Loader,
+    Breadcrumbs
 	},
 
 	data () {

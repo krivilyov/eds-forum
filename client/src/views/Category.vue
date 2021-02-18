@@ -3,6 +3,8 @@
 		<Loader v-if="loading"/>
 
 		<template v-else-if="articles.length > 0">
+			<Breadcrumbs v-bind:breadcrumbItems = "breadcrumbItems" />
+
 			<b-list-group>
 				<b-list-group-item class="d-flex justify-content-between align-items-center" v-for="article in articles" :key="article.id">
 					<div class="article-info">
@@ -31,23 +33,32 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Loader from '@/components/Loader'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export default {
 	name: 'category',
 
 	components: {
-		Loader
+		Loader,
+		Breadcrumbs
 	},
 
 	data () {
 		return {
-			loading: false
+			loading: false,
+			breadcrumbItems: [
+				{
+					text: 'Home',
+					href: '/'	
+				},
+			]
 		}
 	},
 
 	computed: {
 		...mapGetters({
-			articles: 'article/articles'
+			articles: 'article/articles',
+			category: 'article/category'
 		}),
 	},
 
@@ -66,6 +77,12 @@ export default {
 		this.loading = true;
 
 		this.getArticlesAction(alias).then(() => {
+			//update breadcrumbs
+			this.breadcrumbItems.push({
+				text:  this.category.title,
+				href: '/category/' +  this.category.alias
+			});
+
 			//turn off loader
 			this.loading = false;
 		})
