@@ -1,6 +1,9 @@
 <template>
 	<div class="list-group-container">
-		<template v-if="articleInfo">
+
+		<Loader v-if="loading"/>
+
+		<template v-else-if="articleInfo">
 			<b-list-group>
 				<b-list-group-item>
 					<div class="article-info">
@@ -31,12 +34,20 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import PageNotFound from './PageNotFound'
+import Loader from '@/components/Loader'
 
 export default {
 	name: 'article-info',
 	
 	components: {
-		PageNotFound
+		PageNotFound,
+		Loader
+	},
+	
+	data () {
+		return {
+			loading: false
+		}
 	},
 
 	computed: {
@@ -55,7 +66,14 @@ export default {
 		const alias = {
 			'article_alias' : this.$route.params.articleAlias
 		}
-		this.getArticleInfoAction(alias)
+
+		//turn on loader
+		this.loading = true;
+
+		this.getArticleInfoAction(alias).then(() => {
+			//turn off loader
+			this.loading = false;
+		})
 	}
 }
 </script>

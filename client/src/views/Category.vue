@@ -1,6 +1,8 @@
 <template>
 	<div class="list-group-container">
-		<template v-if="articles.length > 0">
+		<Loader v-if="loading"/>
+
+		<template v-else-if="articles.length > 0">
 			<b-list-group>
 				<b-list-group-item class="d-flex justify-content-between align-items-center" v-for="article in articles" :key="article.id">
 					<div class="article-info">
@@ -28,9 +30,20 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import Loader from '@/components/Loader'
 
 export default {
 	name: 'category',
+
+	components: {
+		Loader
+	},
+
+	data () {
+		return {
+			loading: false
+		}
+	},
 
 	computed: {
 		...mapGetters({
@@ -48,7 +61,14 @@ export default {
 		const alias = {
 			'category_alias' : this.$route.params.categoryAlias
 		}
-		this.getArticlesAction(alias)
+
+		//turn on loader
+		this.loading = true;
+
+		this.getArticlesAction(alias).then(() => {
+			//turn off loader
+			this.loading = false;
+		})
 	}
 }
 </script>

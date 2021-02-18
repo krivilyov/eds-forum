@@ -91,7 +91,7 @@ class Useful {
         $val = str_replace('"', "&quot;", $val);
         $val = str_replace("$", "&#036;", $val);
         $val = str_replace("\r", "", $val); // Remove tab chars
-		$val = str_replace("!", "&#33;", $val);
+//		$val = str_replace("!", "&#33;", $val);
         $val = str_replace("'", "&#39;", $val); // for SQL injection security
 
         // Recover Unicode
